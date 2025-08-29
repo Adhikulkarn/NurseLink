@@ -39,7 +39,7 @@ def match_nurse(request):
 
     # 2. Load nurse profiles from CSV
     try:
-        nurses_df = pd.read_csv("nursedata.csv")
+        nurses_df = pd.read_csv("nursedata.csv", quotechar='"')
         nurse_profiles = nurses_df.to_dict(orient="records")
     except FileNotFoundError:
         return render(request, "myapp/match_nurse.html", {
@@ -108,24 +108,6 @@ def match_nurse(request):
             except Exception:
                 best_match = None
 
-        # Normalize keys to expected template fields
-        if isinstance(best_match, dict):
-            key_map = {
-                "Nurse_ID": "Nurse_ID",
-                "Name": "Name",
-                "Age": "Age",
-                "Gender": "Gender",
-                "Experience_Years": "Experience_Years",
-                "Specialization": "Specialization",
-                "Hospital": "Hospital",
-                "Shift": "Shift",
-                "Location": "Location",
-                "Contact": "Contact",
-                "Email": "Email",
-                "Available": "Available",
-            }
-            best_match = {key_map.get(k, k): v for k, v in best_match.items()}
-
     except Exception as e:
         best_match = None
         reason = f"Could not process structured JSON. Raw error: {e}"
@@ -139,6 +121,7 @@ def match_nurse(request):
 
 
 def user_form(request):
+    """Handles patient form submission"""
     if request.method == "POST":
         user = UserProfile(
             name=request.POST.get("name"),
@@ -157,3 +140,22 @@ def user_form(request):
         return redirect("match_nurse")
     return render(request, "myapp/user_form.html")
 
+
+def book_nurse(request):
+    """Show first 10 nurses from CSV & allow booking"""
+    try:
+        # Read directly with headers as-is
+        df = pd.read_csv("nursedata.csv", quotechar='"')
+        nurses = df.head(10).to_dict(orient="records")
+    except FileNotFoundError:
+        nurses = []
+        messages.error(request, "Nurse data CSV file not found.")
+
+    # Handle booking action
+    if request.method == "POST":
+        nurse_name = request.POST.get("nurse_name")
+        if nurse_name:
+            messages.success(request, f"You have successfully booked {nurse_name}!")
+            return redirect("book_nurse")  # Reload page with success message
+
+    return render(request, "myapp/book_nurse.html", {"nurses": nurses})

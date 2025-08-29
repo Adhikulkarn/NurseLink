@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Book a Nurse</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+      background: linear-gradient(135deg, #f0f9ff, #cbebff);
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      padding: 40px;
+    }
+
+    h1 {
+      text-align: center;
+      color: #007c85;
+      margin-bottom: 40px;
+      font-weight: bold;
+    }
+
+    .card {
+      border-radius: 15px;
+      padding: 20px;
+      margin-bottom: 20px;
+      background: #fff;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+
+    .btn-book {
+      background-color: #0099a8;
+      color: white;
+      border-radius: 8px;
+      padding: 8px 16px;
+      font-weight: bold;
+      border: none;
+    }
+
+    .btn-book:hover {
+      background-color: #007c85;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Available Nurses</h1>
+
+  <div class="container">
+    <div class="row">
+
+      <!-- Nurse 1 -->
+      <div class="col-md-4">
+        <div class="card">
+          <h3>Mary Johnson</h3>
+          <p><strong>Age:</strong> 32</p>
+          <p><strong>Gender:</strong> Female</p>
+          <p><strong>Experience:</strong> 7 years</p>
+          <p><strong>Specialization:</strong> Pediatrics</p>
+          <p><strong>Hospital:</strong> City General Hospital</p>
+          <p><strong>Location:</strong> New York</p>
+          <p><strong>Email:</strong> mary.johnson@example.com</p>
+          <form method="POST" class="mt-2">
+            {% csrf_token %}
+            <input type="hidden" name="nurse_name" value="Mary Johnson">
+            <button type="submit" class="btn btn-book">Book</button>
+          </form>
+        </div>
+      </div>
+
+      <!-- Nurse 2 -->
+      <div class="col-md-4">
+        <div class="card">
+          <h3>James Smith</h3>
+          <p><strong>Age:</strong> 40</p>
+          <p><strong>Gender:</strong> Male</p>
+          <p><strong>Experience:</strong> 12 years</p>
+          <p><strong>Specialization:</strong> Geriatrics</p>
+          <p><strong>Hospital:</strong> Mercy Health Center</p>
+          <p><strong>Location:</strong> Chicago</p>
+          <p><strong>Email:</strong> james.smith@example.com</p>
+          <form method="POST" class="mt-2">
+            {% csrf_token %}
+            <input type="hidden" name="nurse_name" value="James Smith">
+            <button type="submit" class="btn btn-book">Book</button>
+          </form>
+        </div>
+      </div>
+
+      <!-- Nurse 3 -->
+      <div class="col-md-4">
+        <div class="card">
+          <h3>Linda Brown</h3>
+          <p><strong>Age:</strong> 29</p>
+          <p><strong>Gender:</strong> Female</p>
+          <p><strong>Experience:</strong> 5 years</p>
+          <p><strong>Specialization:</strong> ICU</p>
+          <p><strong>Hospital:</strong> St. Mary’s Hospital</p>
+          <p><strong>Location:</strong> Los Angeles</p>
+          <p><strong>Email:</strong> linda.brown@example.com</p>
+          <form method="POST" class="mt-2">
+            {% csrf_token %}
+            <input type="hidden" name="nurse_name" value="Linda Brown">
+            <button type="submit" class="btn btn-book">Book</button>
+          </form>
+        </div>
+      </div>
+
+      <!-- Nurse 4 -->
+      <div class="col-md-4">
+        <div class="card">
+          <h3>Robert Davis</h3>
+          <p><strong>Age:</strong> 35</p>
+          <p><strong>Gender:</strong> Male</p>
+          <p><strong>Experience:</strong> 9 years</p>
+          <p><strong>Specialization:</strong> Emergency Care</p>
+          <p><strong>Hospital:</strong> Green Valley Clinic</p>
+          <p><strong>Location:</strong> Houston</p>
+          <p><strong>Email:</strong> robert.davis@example.com</p>
+          <form method="POST" class="mt-2">
+            {% csrf_token %}
+            <input type="hidden" name="nurse_name" value="Robert Davis">
+            <button type="submit" class="btn btn-book">Book</button>
+          </form>
+        </div>
+      </div>
+
+      <!-- Nurse 5 -->
+      <div class="col-md-4">
+        <div class="card">
+          <h3>Emily Wilson</h3>
+          <p><strong>Age:</strong> 27</p>
+          <p><strong>Gender:</strong> Female</p>
+          <p><strong>Experience:</strong> 4 years</p>
+          <p><strong>Specialization:</strong> Orthopedics</p>
+          <p><strong>Hospital:</strong> Metro Care Hospital</p>
+          <p><strong>Location:</strong> Miami</p>
+          <p><strong>Email:</strong> emily.wilson@example.com</p>
+          <form method="POST" class="mt-2">
+            {% csrf_token %}
+            <input type="hidden" name="nurse_name" value="Emily Wilson">
+            <button type="submit" class="btn btn-book">Book</button>
+          </form>
+        </div>
+      </div>
+
+      <!-- Nurse 6 -->
+      <div class="col-md-4">
+        <div class="card">
+          <h3>Michael Taylor</h3>
+          <p><strong>Age:</strong> 38</p>
+          <p><strong>Gender:</strong> Male</p>
+          <p><strong>Experience:</strong> 11 years</p>
+          <p><strong>Specialization:</strong> Cardiology</p>
+          <p><strong>Hospital:</strong> Heartwell Hospital</p>
+          <p><strong>Location:</strong> Boston</p>
+          <p><strong>Email:</strong> michael.taylor@example.com</p>
+          <form method="POST" class="mt-2">
+            {% csrf_token %}
+            <input type="hidden" name="nurse_name" value="Michael Taylor">
+            <button type="submit" class="btn btn-book">Book</button>
+          </form>
+        </div>
+      </div>
+
+      <!-- Nurse 7 -->
+      <div class="col-md-4">
+        <div class="card">
+          <h3>Sophia Martinez</h3>
+          <p><strong>Age:</strong> 31</p>
+          <p><strong>Gender:</strong> Female</p>
+          <p><strong>Experience:</strong> 6 years</p>
+          <p><strong>Specialization:</strong> Oncology</p>
+          <p><strong>Hospital:</strong> Hope Medical Center</p>
+          <p><strong>Location:</strong> San Francisco</p>
+          <p><strong>Email:</strong> sophia.martinez@example.com</p>
+          <form method="POST" class="mt-2">
+            {% csrf_token %}
+            <input type="hidden" name="nurse_name" value="Sophia Martinez">
+            <button type="submit" class="btn btn-book">Book</button>
+          </form>
+        </div>
+      </div>
+
+      <!-- Nurse 8 -->
+      <div class="col-md-4">
+        <div class="card">
+          <h3>Daniel White</h3>
+          <p><strong>Age:</strong> 42</p>
+          <p><strong>Gender:</strong> Male</p>
+          <p><strong>Experience:</strong> 15 years</p>
+          <p><strong>Specialization:</strong> Surgery Assistance</p>
+          <p><strong>Hospital:</strong> Riverbend Hospital</p>
+          <p><strong>Location:</strong> Seattle</p>
+          <p><strong>Email:</strong> daniel.white@example.com</p>
+          <form method="POST" class="mt-2">
+            {% csrf_token %}
+            <input type="hidden" name="nurse_name" value="Daniel White">
+            <button type="submit" class="btn btn-book">Book</button>
+          </form>
+        </div>
+      </div>
+
+      <!-- Nurse 9 -->
+      <div class="col-md-4">
+        <div class="card">
+          <h3>Olivia Green</h3>
+          <p><strong>Age:</strong> 26</p>
+          <p><strong>Gender:</strong> Female</p>
+          <p><strong>Experience:</strong> 3 years</p>
+          <p><strong>Specialization:</strong> Maternity Care</p>
+          <p><strong>Hospital:</strong> Women’s Wellness Hospital</p>
+          <p><strong>Location:</strong> Atlanta</p>
+          <p><strong>Email:</strong> olivia.green@example.com</p>
+          <form method="POST" class="mt-2">
+            {% csrf_token %}
+            <input type="hidden" name="nurse_name" value="Olivia Green">
+            <button type="submit" class="btn btn-book">Book</button>
+          </form>
+        </div>
+      </div>
+
+      <!-- Nurse 10 -->
+      <div class="col-md-4">
+        <div class="card">
+          <h3>William Harris</h3>
+          <p><strong>Age:</strong> 37</p>
+          <p><strong>Gender:</strong> Male</p>
+          <p><strong>Experience:</strong> 10 years</p>
+          <p><strong>Specialization:</strong> Neurology</p>
+          <p><strong>Hospital:</strong> Brain & Spine Institute</p>
+          <p><strong>Location:</strong> Denver</p>
+          <p><strong>Email:</strong> william.harris@example.com</p>
+          <form method="POST" class="mt-2">
+            {% csrf_token %}
+            <input type="hidden" name="nurse_name" value="William Harris">
+            <button type="submit" class="btn btn-book">Book</button>
+          </form>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Bootstrap JS (optional) -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>

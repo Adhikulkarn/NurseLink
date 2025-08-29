@@ -60,6 +60,20 @@
       margin: 0 auto 20px;
       border-radius: 15px;
     }
+
+    .btn-custom {
+      background-color: #0099a8;
+      color: white;
+      border-radius: 30px;
+      padding: 10px 20px;
+      font-weight: bold;
+      transition: background-color 0.3s ease;
+    }
+
+    .btn-custom:hover {
+      background-color: #007c85;
+      color: #fff;
+    }
   </style>
 </head>
 <body>
@@ -116,6 +130,11 @@
               <strong>💡 Why this nurse?</strong> {{ reason }}
             </div>
           {% endif %}
+
+          <!-- Book Another Nurse Button -->
+          <div class="text-center mt-4">
+            <a href="{% url 'book_nurse' %}" class="btn btn-custom">🔄 Book Another Nurse</a>
+          </div>
         </div>
 
       </div>
