@@ -22,21 +22,24 @@ This documentation will:
 
 ## **Lets go through the file system**
 
-NURSELINK/
-├── Authentication/ # Handles user authentication
-├── booking/ # Booking-related functionality
-├── myapp/ # Additional app (custom features)
-├── NURSELINK/ # Core project files
-│   ├── __init__.py
-│   ├── asgi.py # ASGI config
-│   ├── settings.py # Django settings
-│   ├── urls.py # Project URLs
-│   └── wsgi.py # WSGI config
-├── venv/ # Virtual environment
-├── .env # Environment variables
-├── db.sqlite3 # SQLite database
-├── manage.py # Django management script
-├── nursedata.csv # Nurse dataset
-├── requirements.txt # Project dependencies
-├── Pipfile # Pipenv dependency manager
-└── Pipfile.lock
+    NURSELINK/
+    ├── Authentication
+    ├── booking
+    ├── myapp
+    ├── NURSELINK
+    │   ├── __init__.py
+    │   ├── asgi.py
+    │   ├── settings.py
+    │   ├── urls.py
+    │   └── wsgi.py
+    ├── venv/ 
+    ├── .env 
+    ├── db.sqlite3
+    ├── manage.py 
+    ├── nursedata.csv 
+    ├── requirements.txt
+    ├── Pipfile 
+    └── Pipfile.lock
+
+---
+
