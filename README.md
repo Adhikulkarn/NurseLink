@@ -22,11 +22,11 @@ This documentation will:
 
 ## **Lets go through the file system**
 
-    NURSELINK/
+    NurseLink/
     ├── Authentication
     ├── booking
     ├── myapp
-    ├── NURSELINK
+    ├── NurseLink
     │   ├── __init__.py
     │   ├── asgi.py
     │   ├── settings.py
@@ -40,6 +40,15 @@ This documentation will:
     ├── requirements.txt
     ├── Pipfile 
     └── Pipfile.lock
+
+**NurseLink** : It is the root Directory 
+**NurseLink** : It is the directort which contains the manage.py which is essential to run the server
+**Authentication** : This is a django app which handles the Authentication part [Login/Signup]
+**booking** : This is a django app which takes you to the booking page
+**myapp** : This is a django app which handles the AI based user-profile matching 
+**.env** : This is the file which contains environment vaiables
+**nursedata.csv** : This is a CSV file which contains fake nurse data genrated using pandas.faker
+**requirements.txt** : Contains the requirements to be downloaded to run the code locally and also used while deploying the project
 
 ---
 
