@@ -54,7 +54,7 @@ This documentation will:
 
 ### **Note : You will find the code to the chatbot in a different repository, that code is deployed using streamlit, but a local chatbot will be integrated soo,** 
 [Chatbot repo: https://github.com/Adhikulkarn/Nurse_link-Chatbot]
-
+Note: A locat chatbot shouldbe built
 ---
 
 
