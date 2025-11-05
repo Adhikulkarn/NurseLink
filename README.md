@@ -75,6 +75,10 @@ GEMINI_API_KEY=your_api_key_here
 
 > ⚠️ This file will be ignored when committing to the main branch.
 
+### **Get Your Gemini API Key**
+You can obtain a free Gemini API key from Google AI Studio:  
+👉 [https://aistudio.google.com/app/apikey](https://aistudio.google.com/app/apikey)
+
 ---
 
 ## **🚀 Running the Project**
