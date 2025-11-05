@@ -7,9 +7,11 @@
 ---
 
 ## **Overview**  
-This project provides a streamlined solution for patients and families to book qualified nurses easily and efficiently. The AI-driven features ensure:  
-- **Instant query resolution** through the chatbot  
-- **Smart profile matching** for better nurse–patient compatibility  
+This project provides a streamlined solution for patients and families to book qualified nurses easily and efficiently.  
+
+The AI-driven features ensure:  
+- ⚡ **Instant query resolution** through the chatbot  
+- 🧠 **Smart nurse–patient matching** for better compatibility  
 
 ---
 
@@ -20,41 +22,116 @@ This documentation will:
 
 ---
 
-## **Lets go through the file system**
+## **📁 File Structure**
 
-    NurseLink/
-    ├── Authentication
-    ├── booking
-    ├── myapp
-    ├── NurseLink
-    │   ├── __init__.py
-    │   ├── asgi.py
-    │   ├── settings.py
-    │   ├── urls.py
-    │   └── wsgi.py
-    ├── venv/ 
-    ├── .env 
-    ├── db.sqlite3
-    ├── manage.py 
-    ├── nursedata.csv 
-    ├── requirements.txt
-    ├── Pipfile 
-    └── Pipfile.lock
+```bash
+NurseLink/
+├── Authentication
+├── booking
+├── myapp
+├── NurseLink
+│   ├── __init__.py
+│   ├── asgi.py
+│   ├── settings.py
+│   ├── urls.py
+│   └── wsgi.py
+├── venv/ 
+├── .env 
+├── db.sqlite3
+├── manage.py 
+├── nursedata.csv 
+├── requirements.txt
+├── Pipfile 
+└── Pipfile.lock
+```
 
-- **NurseLink** : It is the root Directory 
-- **NurseLink** : It is the directort which contains the manage.py which is essential to run the server
-- **Authentication** : This is a django app which handles the Authentication part [Login/Signup]
-- **booking** : This is a django app which takes you to the booking page
-- **myapp** : This is a django app which handles the AI based user-profile matching 
-- **.env** : This is the file which contains environment vaiables
-- **nursedata.csv** : This is a CSV file which contains fake nurse data genrated using pandas.faker
-- **requirements.txt** : Contains the requirements to be downloaded to run the code locally and also used while deploying the project
+### **Folder Descriptions**
+- **NurseLink/** → Root directory of the project  
+- **NurseLink/** → Contains `manage.py`, essential for running the server  
+- **Authentication/** → Handles user login and signup  
+- **booking/** → Manages nurse booking functionality  
+- **myapp/** → Handles AI-based user–profile matching logic  
+- **.env** → Stores environment variables (ignored in version control)  
+- **nursedata.csv** → Contains generated nurse data using `pandas` and `faker`  
+- **requirements.txt** → Lists dependencies required for local setup and deployment  
 
 ---
 
-### **Note : You will find the code to the chatbot in a different repository, that code is deployed using streamlit, but a local chatbot will be integrated soo,** 
-[Chatbot repo: https://github.com/Adhikulkarn/Nurse_link-Chatbot]
-Note: A locat chatbot shouldbe built
+## **🤖 Chatbot Info**
+> The chatbot is hosted in a separate repository and deployed using Streamlit.  
+> A local chatbot integration is planned soon.  
+
+🔗 **Chatbot Repo:** [https://github.com/Adhikulkarn/Nurse_link-Chatbot](https://github.com/Adhikulkarn/Nurse_link-Chatbot)
+
 ---
 
+## **⚙️ Environment Setup**
 
+Before running the project, create a `.env` file in the **root directory** and add your Gemini API key:  
+
+```bash
+GEMINI_API_KEY=your_api_key_here
+```
+
+> ⚠️ This file will be ignored when committing to the main branch.
+
+---
+
+## **🚀 Running the Project**
+
+### **Step 1: Create a Virtual Environment**
+
+#### For Windows:
+```bash
+pip install pipenv
+pipenv shell
+```
+
+#### For Linux:
+```bash
+python3 -m venv venv
+source venv/bin/activate
+```
+
+---
+
+### **Step 2: Install Dependencies**
+
+First, ensure you’re in the root directory and `requirements.txt` is present:
+```bash
+ls
+```
+
+If you see `requirements.txt` listed, run the following:
+
+#### For Windows:
+```bash
+pipenv install -r requirements.txt
+```
+
+#### For Linux:
+```bash
+pip install -r requirements.txt
+```
+
+---
+
+### **Step 3: Run the Server**
+
+Once dependencies are installed, start the Django development server:
+
+```bash
+python manage.py runserver
+```
+
+Your application will be available at:  
+👉 `http://127.0.0.1:8000/`
+
+---
+
+✅ You’re now ready to explore **NurseLink** locally!
+
+---
+
+📬 **For any queries**, contact the developer at:  
+**adityask200615@gmail.com**
