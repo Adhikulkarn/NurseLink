@@ -1,132 +1,396 @@
 <!DOCTYPE html>
 <html lang="en">
+{% load static %}
+
 <head>
-  <meta charset="UTF-8">
-  <title>User Registration Form</title>
-  <style>
-    body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: linear-gradient(135deg, #a2e8f4, #e6f9fc);
-      margin: 0;
-      padding: 0;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      min-height: 100vh;
-    }
+    <meta charset="UTF-8">
+    <title>User Registration Form</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
-    .form-container {
-      background: #fff;
-      padding: 30px 40px;
-      border-radius: 15px;
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-      width: 420px;
-    }
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #a2e8f4 20%, #e6f9fc 80%);
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
 
-    .form-container h2 {
-      text-align: center;
-      margin-bottom: 20px;
-      color: #0099a8;
-    }
+        
+        body::before,
+        body::after {
+            content: "";
+            position: absolute;
+            border-radius: 50%;
+            opacity: 0.2;
+            z-index: 0;
+            animation: float 8s ease-in-out infinite;
+        }
 
-    label {
-      display: block;
-      margin-top: 15px;
-      margin-bottom: 5px;
-      font-weight: 600;
-      color: #333;
-    }
+        body::before {
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, #00b7c5 20%, transparent 70%);
+            top: 10%;
+            left: -100px;
+            animation-duration: 7s;
+        }
 
-    input, select, textarea {
-      width: 100%;
-      padding: 10px 12px;
-      border: 1px solid #ddd;
-      border-radius: 8px;
-      outline: none;
-      transition: 0.3s;
-    }
+        body::after {
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, #0099a8 25%, transparent 70%);
+            bottom: -120px;
+            right: -100px;
+            animation-duration: 9s;
+            animation-direction: reverse;
+        }
 
-    input:focus, select:focus, textarea:focus {
-      border-color: #00b7c5;
-      box-shadow: 0 0 5px rgba(0, 183, 197, 0.4);
-    }
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(20px); }
+        }
 
-    textarea {
-      resize: none;
-    }
+        .form-wrapper {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 40px;
+            flex-wrap: wrap;
+            position: relative;
+            z-index: 1;
+        }
 
-    button {
-      margin-top: 20px;
-      width: 100%;
-      padding: 12px;
-      background: linear-gradient(135deg, #00b7c5, #0099a8);
-      border: none;
-      border-radius: 25px;
-      color: #fff;
-      font-size: 16px;
-      font-weight: bold;
-      cursor: pointer;
-      transition: 0.3s;
-    }
+        
+        .medical-icon {
+            position: absolute;
+            color: #00b7c5;
+            opacity: 0.12;
+            z-index: -1; 
+            text-shadow: 0 5px 15px rgba(0, 153, 168, 0.25);
+        }
 
-    button:hover {
-      background: linear-gradient(135deg, #0099a8, #00b7c5);
-      box-shadow: 0 4px 12px rgba(0, 153, 168, 0.3);
-    }
-  </style>
+        .medical-icon.top-left {
+            top: 30px;
+            left: 35px;
+            font-size: 90px;
+            animation: floatDown 7s ease-in-out infinite;
+        }
+
+        .medical-icon.bottom-right {
+            bottom: 30px;
+            right: 35px;
+            font-size: 100px;
+            animation: floatUp 7s ease-in-out infinite;
+        }
+
+        @keyframes floatDown {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(15px); }
+        }
+
+        @keyframes floatUp {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+        }
+
+        @media (max-width: 768px) {
+            .medical-icon.top-left {
+                top: 20px;
+                left: 20px;
+                font-size: 130px;
+            }
+            .medical-icon.bottom-right {
+                bottom: 20px;
+                right: 20px;
+                font-size: 150px;
+            }
+        }
+        
+        
+        .form-container {
+            background: #fff;
+            padding: 40px 35px;
+            border-radius: 18px;
+            box-shadow: 0 10px 25px rgba(0, 153, 168, 0.15);
+            width: 420px;
+            max-width: 100%; /* Ensure responsiveness */
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position:relative;
+            padding-top:60px;
+        }
+
+        .form-container:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 30px rgba(0, 153, 168, 0.25);
+        }
+
+        .form-logo {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 5px;
+        }
+
+        .form-logo img {
+            width: 80px;
+            height: auto;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0, 153, 168, 0.25);
+            margin-bottom:10px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .form-logo img:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 15px rgba(0, 153, 168, 0.3);
+        }
+
+        .company-name {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #0099a8;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin: 0;
+        }
+
+        .form-container h2 {
+            margin-top: 30px;
+            color: #0099a8;
+            font-size: 1.3rem;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-top: 15px;
+            margin-bottom: 5px;
+            font-weight: 600;
+            color: #333;
+            text-align:left;
+        }
+
+        
+        input, select, textarea {
+            width: 100%;
+            padding: 10px 12px;
+            border: 1.6px solid #00b7c5;
+            border-radius: 8px;
+            outline: none;
+            background-color: #fff;
+            font-size: 15px;
+            transition:all 0.3s;
+            color:#333;
+            box-sizing: border-box; 
+        }
+
+        
+        input:not([type="date"]):not([type="time"]) {
+             padding-left: 11px;
+        }
+        
+      
+        select {
+            appearance: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+        }
+        
+        
+        input:hover, select:hover, textarea:hover {
+            border-color: #0099a8; 
+        }
+
+        input:focus, select:focus, textarea:focus {
+            border-color: #0099a8;
+            box-shadow: 0 0 6px rgba(0, 153, 168, 0.35);
+        }
+
+        input:disabled, select:disabled, textarea:disabled {
+            background-color: #f2fafa;
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        
+        textarea {
+            resize: none;
+            height: 80px; 
+            padding-left: 11px;
+        }
+
+      
+        ::placeholder {
+            color: rgba(0, 0, 0, 0.45);
+            opacity: 1;
+            transition: opacity 0.3s ease;
+        }
+        input:focus::placeholder,
+        textarea:focus::placeholder {
+            opacity: 0.2;
+        }
+
+      
+        select {
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' fill='%2300b7c5'%3E%3Cpath d='M7 10L2 4h10L7 10z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 14px center;
+            background-size: 12px;
+            padding-right: 35px;
+            cursor: pointer;
+        }
+        select:not(:invalid) {
+            color: #333;
+        }
+        select option[value=""] {
+            color: rgba(0, 0, 0, 0.45); 
+        }
+        
+
+       
+        input[type="date"],
+        input[type="time"] {
+            position: relative;
+            padding-right: 35px; 
+        }
+
+       
+        input[type="date"]::-webkit-calendar-picker-indicator,
+        input[type="time"]::-webkit-calendar-picker-indicator {
+            background: none; 
+            opacity: 0; 
+            cursor: pointer;
+            width: 100%;
+            height: 100%;
+        }
+        
+        
+        input[type="date"] {
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='%2300b7c5'%3E%3Cpath d='M12 2h-1V1h-2v1H7V1H5v1H4c-1.1 0-2 .9-2 2v9c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 11H4V6h8v7zm0-9H4V4h8v4z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 12px center;
+            background-size: 18px 18px; 
+        }
+
+        
+        input[type="time"] {
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='%2300b7c5'%3E%3Cpath d='M12 8c0 2.21-1.79 4-4 4s-4-1.79-4-4 1.79-4 4-4 4 1.79 4 4zm-4-3c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3zm.5 1.5v3h2v-3h-2z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 12px center;
+            background-size: 18px 18px;
+        }
+
+
+      
+        button {
+            margin-top: 20px;
+            width: 100%;
+            padding: 12px;
+            background: linear-gradient(135deg, #00b7c5, #0099a8);
+            border: none;
+            border-radius: 25px;
+            color: #fff;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition:all 0.3s;
+        }
+
+        button:hover {
+            background: linear-gradient(135deg, #0099a8, #00b7c5);
+            box-shadow: 0 4px 12px rgba(0, 153, 168, 0.3);
+            transform: translateY(-2px);
+        }
+
+        button:active {
+            transform: translateY(0);
+            box-shadow: 0 3px 8px rgba(0, 153, 168, 0.2);
+        }
+        
+    </style>
 </head>
 <body>
-  <div class="form-container">
-    <h2>Personal Detail To Book a Nurse</h2>
-    <form method="post">
-      {% csrf_token %}
-      
-      <label for="name">Name:</label>
-      <input type="text" id="name" name="name" required>
+    
+    <div class="medical-icon top-left">
+        <i class="fa-solid fa-stethoscope"></i>
+    </div>
 
-      <label for="email">Email:</label>
-      <input type="email" id="email" name="email" required>
+    <div class="medical-icon bottom-right">
+        <i class="fa-solid fa-user-doctor"></i>
+    </div>
 
-      <label for="age">Age:</label>
-      <input type="number" id="age" name="age" required>
+    <div class="form-wrapper">
+        <div class="form-container">
+            <div class="form-logo">
+                <img src="{% static 'images/logoForm.png' %}" onerror="this.onerror=null; this.src='https://placehold.co/80x80/00b7c5/ffffff?text=NL'" alt="App Logo">
+                <h3 class="company-name">NurseLink</h3>
+            </div>
+            
+            <h2>Personal Detail To Book a Nurse</h2>
+            <form method="post">
+                {% csrf_token %}
+                
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" placeholder="Enter Your Full Name" required>
 
-      <label for="gender">Gender:</label>
-      <input type="text" id="gender" name="gender" required>
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" placeholder="Enter Your Email ID" required>
 
-      <label for="specialization">Specialization:</label>
-      <select id="specialization" name="specialization" required>
-        <option value="">-- Select Specialization --</option>
-        <option value="General Care">General Care</option>
-        <option value="Post Surgery Care">Post Surgery Care</option>
-        <option value="Post Pregnancy Care">Post Pregnancy Care</option>
-        <option value="Elderly Care">Elderly Care</option>
-        <option value="Pediatric Care">Pediatric Care</option>
-      </select>
+                <label for="age">Age:</label>
+                <input type="number" id="age" name="age" min="1" max="120" placeholder="Enter Your Age" required>
 
-      <label for="location">Location:</label>
-      <select id="location" name="location" required>
-        <option value="">-- Select Location --</option>
-        <option value="Bangalore">Bangalore</option>
-        <option value="Chennai">Chennai</option>
-        <option value="Kolkata">Kolkata</option>
-        <option value="Mumbai">Mumbai</option>
-        <option value="Delhi">Delhi</option>
-      </select>
+                <label for="gender">Gender:</label>
+                <select id="gender" name="gender" required>
+                    <option value="">-- Select Gender --</option>
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                    <option value="Other">Other</option>
+                </select>
 
-      <label for="date">Preferred Date:</label>
-      <input type="date" id="date" name="date" required>
 
-      <label for="time">Preferred Time:</label>
-      <input type="time" id="time" name="time" required>
+                <label for="specialization">Specialization:</label>
+                <select id="specialization" name="specialization" required>
+                    <option value="">-- Select Specialization --</option>
+                    <option value="General Care">General Care</option>
+                    <option value="Post Surgery Care">Post Surgery Care</option>
+                    <option value="Post Pregnancy Care">Post Pregnancy Care</option>
+                    <option value="Elderly Care">Elderly Care</option>
+                    <option value="Pediatric Care">Pediatric Care</option>
+                </select>
 
-      <label for="need">Your Need:</label>
-      <textarea id="need" name="need" rows="4" required></textarea>
+                <label for="location">Location:</label>
+                <select id="location" name="location" required>
+                    <option value="">-- Select Location --</option>
+                    <option value="Bangalore">Bangalore</option>
+                    <option value="Chennai">Chennai</option>
+                    <option value="Kolkata">Kolkata</option>
+                    <option value="Mumbai">Mumbai</option>
+                    <option value="Delhi">Delhi</option>
+                </select>
 
-      <label for="address">Address:</label>
-      <textarea id="address" name="address" rows="3" required></textarea>
+                <label for="date">Preferred Date:</label>
+                <input type="date" id="date" name="date" required>
 
-      <button type="submit">Submit</button>
-    </form>
-  </div>
+                <label for="time">Preferred Time:</label>
+                <input type="time" id="time" name="time" required>
+
+                <label for="need">Your Need:</label>
+                <textarea id="need" name="need" placeholder="Describe your care requirements..." required></textarea> 
+
+                <label for="address">Address:</label>
+                <textarea id="address" name="address" placeholder="Enter Your Address..." required></textarea>
+
+                <button type="submit">Submit</button>
+            </form>
+        </div>
+    </div>
 </body>
 </html>
