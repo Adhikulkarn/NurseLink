@@ -1,0 +1,32 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Nurse Login</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin:40px; }
+    form { max-width:400px; border:1px solid #ddd; padding:20px; border-radius:8px; }
+    input { width:100%; padding:8px; margin-top:8px; }
+    .btn { margin-top:12px; padding:10px 14px; background:#357edd; color:#fff; border:none; border-radius:6px; cursor:pointer; }
+    .error { color: #b00020; }
+  </style>
+</head>
+<body>
+  <h1>Nurse Login</h1>
+
+  {% if error %}
+    <p class="error">{{ error }}</p>
+  {% endif %}
+
+  <form method="post">
+    {% csrf_token %}
+    <label>Email</label>
+    {{ form.email }}
+    <label>Password</label>
+    {{ form.password }}
+    <button class="btn" type="submit">Login</button>
+  </form>
+
+  <p><a href="{% url 'nurse_onboard' %}">Create account</a> · <a href="{% url 'nurse_landing' %}">Back</a></p>
+</body>
+</html>

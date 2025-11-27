@@ -1,0 +1,37 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Nurse Onboarding</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin:40px; }
+    form { max-width:600px; border:1px solid #ddd; padding:20px; border-radius:8px; }
+    label { display:block; margin-top:12px; }
+    input[type="text"], input[type="email"], input[type="number"], input[type="password"] { width:100%; padding:8px; box-sizing:border-box; }
+    .btn { margin-top:12px; padding:10px 14px; background:#0b6; color:#fff; border:none; border-radius:6px; cursor:pointer; }
+  </style>
+</head>
+<body>
+  <h1>Onboard as Nurse</h1>
+
+  <form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.non_field_errors }}
+    <label>Full name</label>
+    {{ form.full_name }}
+    <label>Phone</label>
+    {{ form.phone }}
+    <label>Years of experience</label>
+    {{ form.experience }}
+    <label>Email (will be your login)</label>
+    {{ form.email }}
+    <label>Password</label>
+    {{ form.password }}
+    <label>Upload certificate (optional)</label>
+    {{ form.certificate }}
+    <button class="btn" type="submit">Submit & Register</button>
+  </form>
+
+  <p><a href="{% url 'nurse_landing' %}">Back</a></p>
+</body>
+</html>
