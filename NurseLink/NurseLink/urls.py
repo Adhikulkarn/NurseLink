@@ -24,7 +24,8 @@ urlpatterns = [
     path('', include('Authentication.urls')),
     path('home/', include('booking.urls')),
     path('myapp/', include('myapp.urls')),  # New line added here
-     path('nurse/', include('Nurse.urls')),
+    path('nurse/', include('Nurse.urls')),
+    path("chatbot/", include("chatbot.urls")),
 ]
 
 if settings.DEBUG:

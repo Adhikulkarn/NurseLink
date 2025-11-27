@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>NurseLink AI Assistant</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #e0f7fa 0%, #b2ebf2 100%);
+            min-height: 100vh;
+            padding: 0;
+        }
+
+        /* Header matching landing page */
+        .header {
+            background: #17a2b8;
+            padding: 15px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: white;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .logo-icon {
+            background: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+        }
+
+        .header-buttons {
+            display: flex;
+            gap: 15px;
+        }
+
+        .btn-login, .btn-signup {
+            padding: 10px 25px;
+            border: none;
+            border-radius: 25px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-login {
+            background: white;
+            color: #17a2b8;
+        }
+
+        .btn-login:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+
+        .btn-signup {
+            background: #0d8ca3;
+            color: white;
+        }
+
+        .btn-signup:hover {
+            background: #0a7089;
+        }
+
+        /* Main container */
+        .container {
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .chat-card {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+        }
+
+        h1 {
+            color: #2d3748;
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            color: #64748b;
+            font-size: 16px;
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+
+        /* Form styling */
+        .question-form {
+            margin-bottom: 30px;
+        }
+
+        textarea {
+            width: 100%;
+            min-height: 100px;
+            padding: 15px;
+            font-size: 16px;
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
+            resize: vertical;
+            font-family: inherit;
+            transition: border-color 0.3s ease;
+        }
+
+        textarea:focus {
+            outline: none;
+            border-color: #17a2b8;
+        }
+
+        textarea::placeholder {
+            color: #94a3b8;
+        }
+
+        .btn-ask {
+            background: #17a2b8;
+            color: white;
+            padding: 14px 35px;
+            border: none;
+            border-radius: 25px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 15px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(23, 162, 184, 0.3);
+        }
+
+        .btn-ask:hover {
+            background: #138496;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(23, 162, 184, 0.4);
+        }
+
+        .btn-ask:active {
+            transform: translateY(0);
+        }
+
+        /* Answer section */
+        .answer {
+            background: linear-gradient(135deg, #e0f7fa 0%, #b2ebf2 50%);
+            padding: 25px;
+            border-radius: 15px;
+            margin-top: 30px;
+            border-left: 4px solid #17a2b8;
+            animation: slideIn 0.3s ease;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .answer h3 {
+            color: #17a2b8;
+            font-size: 20px;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .answer h3:before {
+            content: "💬";
+            font-size: 24px;
+        }
+
+        .answer p {
+            color: #2d3748;
+            font-size: 16px;
+            line-height: 1.8;
+            white-space: pre-wrap;
+        }
+
+        /* Decorative elements */
+        .decoration {
+            position: fixed;
+            border-radius: 50%;
+            opacity: 0.1;
+            pointer-events: none;
+        }
+
+        .decoration-1 {
+            width: 300px;
+            height: 300px;
+            background: #17a2b8;
+            top: -100px;
+            right: -100px;
+        }
+
+        .decoration-2 {
+            width: 200px;
+            height: 200px;
+            background: #17a2b8;
+            bottom: -50px;
+            left: -50px;
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .header {
+                padding: 15px 20px;
+            }
+
+            .logo {
+                font-size: 20px;
+            }
+
+            .header-buttons {
+                gap: 10px;
+            }
+
+            .btn-login, .btn-signup {
+                padding: 8px 18px;
+                font-size: 13px;
+            }
+
+            .container {
+                margin: 20px auto;
+            }
+
+            .chat-card {
+                padding: 25px;
+            }
+
+            h1 {
+                font-size: 26px;
+            }
+
+            .subtitle {
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!-- Decorative elements -->
+<div class="decoration decoration-1"></div>
+<div class="decoration decoration-2"></div>
+
+<!-- Header -->
+<div class="header">
+    <div class="logo">
+        <div class="logo-icon">💙</div>
+        <span>NurseLink</span>
+    </div>
+    <div class="header-buttons">
+        <button class="btn-login">LOGIN</button>
+        <button class="btn-signup">SIGNUP</button>
+    </div>
+</div>
+
+<!-- Main Content -->
+<div class="container">
+    <div class="chat-card">
+        <h1>NurseLink AI Assistant</h1>
+        <p class="subtitle">Ask any question about how NurseLink works. Our AI assistant will provide answers using the official NurseLink manual to help you understand our services better.</p>
+
+        <form method="POST" class="question-form">
+            {% csrf_token %}
+            <textarea name="question" placeholder="Type your question here... (e.g., How do I book a nurse? What services do you offer?)" required></textarea>
+            <br>
+            <button type="submit" class="btn-ask">Ask Question</button>
+        </form>
+
+        {% if answer %}
+        <div class="answer">
+            <h3>Answer</h3>
+            <p>{{ answer }}</p>
+        </div>
+        {% endif %}
+    </div>
+</div>
+
+</body>
+</html>

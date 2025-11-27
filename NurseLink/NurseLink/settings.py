@@ -44,7 +44,8 @@ INSTALLED_APPS = [
     'Authentication',
     'booking',
     'myapp',
-    'Nurse'
+    'Nurse',
+    'chatbot',
 ]
 
 MIDDLEWARE = [

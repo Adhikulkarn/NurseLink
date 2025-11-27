@@ -1,32 +1,349 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
 <head>
-  <meta charset="utf-8">
-  <title>Nurse Login</title>
-  <style>
-    body { font-family: Arial, sans-serif; margin:40px; }
-    form { max-width:400px; border:1px solid #ddd; padding:20px; border-radius:8px; }
-    input { width:100%; padding:8px; margin-top:8px; }
-    .btn { margin-top:12px; padding:10px 14px; background:#357edd; color:#fff; border:none; border-radius:6px; cursor:pointer; }
-    .error { color: #b00020; }
-  </style>
+    <meta charset="utf-8">
+    <title>Nurse Login — NurseLink</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #e0f7fa 0%, #b2ebf2 100%);
+            min-height: 100vh;
+        }
+
+        /* Header */
+        .header {
+            background: #26c6da;
+            padding: 15px 40px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo-icon {
+            background: white;
+            width: 45px;
+            height: 45px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #26c6da;
+            font-size: 22px;
+        }
+
+        .logo-text {
+            color: white;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        /* Main Content */
+        .main-content {
+            max-width: 500px;
+            margin: 60px auto;
+            padding: 0 20px;
+        }
+
+        .login-card {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+        }
+
+        h1 {
+            color: #2d3748;
+            font-size: 32px;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+
+        .subtitle {
+            color: #64748b;
+            font-size: 15px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        /* Error Message */
+        .error {
+            background: #fee2e2;
+            border-left: 4px solid #ef4444;
+            border-radius: 8px;
+            padding: 12px 15px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .error i {
+            color: #dc2626;
+            font-size: 18px;
+        }
+
+        .error p {
+            color: #dc2626;
+            font-size: 14px;
+            margin: 0;
+        }
+
+        /* Form Styling */
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            color: #2d3748;
+            font-size: 14px;
+            font-weight: 600;
+            margin-top: 20px;
+            margin-bottom: 8px;
+            display: block;
+        }
+
+        input[type="email"],
+        input[type="password"] {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #e2e8f0;
+            border-radius: 10px;
+            font-size: 15px;
+            transition: border-color 0.3s ease;
+            font-family: inherit;
+        }
+
+        input[type="email"]:focus,
+        input[type="password"]:focus {
+            outline: none;
+            border-color: #26c6da;
+        }
+
+        /* Submit Button */
+        .btn {
+            margin-top: 30px;
+            padding: 14px 30px;
+            background: #357edd;
+            color: white;
+            border: none;
+            border-radius: 25px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(53, 126, 221, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .btn:hover {
+            background: #2868c7;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(53, 126, 221, 0.4);
+        }
+
+        .btn:active {
+            transform: translateY(0);
+        }
+
+        /* Links Section */
+        .links-section {
+            margin-top: 25px;
+            padding-top: 25px;
+            border-top: 1px solid #e2e8f0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .link {
+            color: #26c6da;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .link:hover {
+            color: #00acc1;
+            gap: 8px;
+        }
+
+        .link i {
+            font-size: 12px;
+        }
+
+        .separator {
+            color: #cbd5e1;
+            font-weight: bold;
+        }
+
+        /* Decorative medical icons */
+        .decoration-icon {
+            position: absolute;
+            font-size: 120px;
+            opacity: 0.05;
+            pointer-events: none;
+        }
+
+        .decoration-1 {
+            top: 15%;
+            right: 8%;
+            color: #357edd;
+            animation: float 7s ease-in-out infinite;
+        }
+
+        .decoration-2 {
+            bottom: 15%;
+            left: 8%;
+            color: #26c6da;
+            animation: float 9s ease-in-out infinite 3s;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0px) rotate(0deg);
+            }
+            50% {
+                transform: translateY(-25px) rotate(8deg);
+            }
+        }
+
+        /* Input Icon Container */
+        .input-wrapper {
+            position: relative;
+        }
+
+        .input-icon {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #94a3b8;
+            font-size: 16px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .header {
+                padding: 15px 20px;
+            }
+
+            .logo-text {
+                font-size: 20px;
+            }
+
+            .main-content {
+                padding: 0 15px;
+                margin: 40px auto;
+            }
+
+            .login-card {
+                padding: 30px 25px;
+            }
+
+            h1 {
+                font-size: 26px;
+            }
+
+            .subtitle {
+                font-size: 14px;
+            }
+
+            .links-section {
+                flex-direction: column;
+                gap: 12px;
+            }
+
+            .separator {
+                display: none;
+            }
+        }
+    </style>
 </head>
 <body>
-  <h1>Nurse Login</h1>
 
-  {% if error %}
-    <p class="error">{{ error }}</p>
-  {% endif %}
+    <!-- Decorative Icons -->
+    <i class="fas fa-user-md decoration-icon decoration-1"></i>
+    <i class="fas fa-lock decoration-icon decoration-2"></i>
 
-  <form method="post">
-    {% csrf_token %}
-    <label>Email</label>
-    {{ form.email }}
-    <label>Password</label>
-    {{ form.password }}
-    <button class="btn" type="submit">Login</button>
-  </form>
+    <!-- Header -->
+    <header class="header">
+        <nav class="nav-container">
+            <div class="logo">
+                <div class="logo-icon">
+                    <i class="fas fa-heartbeat"></i>
+                </div>
+                <span class="logo-text">NurseLink</span>
+            </div>
+        </nav>
+    </header>
 
-  <p><a href="{% url 'nurse_onboard' %}">Create account</a> · <a href="{% url 'nurse_landing' %}">Back</a></p>
+    <!-- Main Content -->
+    <div class="main-content">
+        <div class="login-card">
+            <h1>Nurse Login</h1>
+            <p class="subtitle">Welcome back! Please login to access your dashboard.</p>
+
+            {% if error %}
+            <div class="error">
+                <i class="fas fa-exclamation-circle"></i>
+                <p>{{ error }}</p>
+            </div>
+            {% endif %}
+
+            <form method="post">
+                {% csrf_token %}
+                
+                <label>Email Address</label>
+                {{ form.email }}
+                
+                <label>Password</label>
+                {{ form.password }}
+                
+                <button class="btn" type="submit">
+                    <i class="fas fa-sign-in-alt"></i> Login
+                </button>
+            </form>
+
+            <div class="links-section">
+                <a href="{% url 'nurse_onboard' %}" class="link">
+                    <i class="fas fa-user-plus"></i> Create account
+                </a>
+                <span class="separator">·</span>
+                <a href="{% url 'nurse_landing' %}" class="link">
+                    <i class="fas fa-arrow-left"></i> Back
+                </a>
+            </div>
+        </div>
+    </div>
+
 </body>
 </html>

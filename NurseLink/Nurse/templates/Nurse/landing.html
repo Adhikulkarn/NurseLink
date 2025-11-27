@@ -1,30 +1,482 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
 <head>
-  <meta charset="utf-8">
-  <title>Nurse — NurseLink</title>
-  <style>
-    body { font-family: Arial, sans-serif; margin:40px; }
-    .card { border:1px solid #ddd; padding:20px; border-radius:8px; max-width:800px; }
-    .cta { display:inline-block; margin-right:10px; padding:10px 14px; border-radius:6px; text-decoration:none; background:#0b6; color:#fff; }
-  </style>
+    <meta charset="utf-8">
+    <title>Nurse — NurseLink</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #e0f7fa 0%, #b2ebf2 100%);
+            min-height: 100vh;
+        }
+
+        /* Header */
+        .header {
+            background: #26c6da;
+            padding: 15px 40px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo-icon {
+            background: white;
+            width: 45px;
+            height: 45px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #26c6da;
+            font-size: 22px;
+        }
+
+        .logo-text {
+            color: white;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 15px;
+        }
+
+        .btn-login, .btn-signup {
+            padding: 10px 30px;
+            border: none;
+            border-radius: 25px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+        }
+
+        .btn-login {
+            background: white;
+            color: #26c6da;
+        }
+
+        .btn-login:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+
+        .btn-signup {
+            background: #00acc1;
+            color: white;
+        }
+
+        .btn-signup:hover {
+            background: #0097a7;
+        }
+
+        /* Main Content */
+        .main-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 80px 40px;
+        }
+
+        .hero-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+        }
+
+        .hero-left {
+            padding-right: 40px;
+        }
+
+        .hero-title {
+            font-size: 64px;
+            line-height: 1.1;
+            margin-bottom: 30px;
+            color: #2d3748;
+            font-weight: bold;
+        }
+
+        .hero-title-main {
+            display: block;
+            font-size: 48px;
+            margin-bottom: 15px;
+        }
+
+        .title-line {
+            display: block;
+        }
+
+        .highlight {
+            color: #26c6da;
+            position: relative;
+        }
+
+        .highlight::after {
+            content: '';
+            position: absolute;
+            bottom: 5px;
+            left: 0;
+            right: 0;
+            height: 8px;
+            background: #26c6da;
+            opacity: 0.3;
+        }
+
+        .hero-description {
+            font-size: 16px;
+            color: #64748b;
+            line-height: 1.8;
+            margin-bottom: 40px;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .cta-primary, .cta-secondary {
+            padding: 14px 28px;
+            border: none;
+            border-radius: 25px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .cta-primary {
+            background: #10b981;
+            color: white;
+        }
+
+        .cta-primary:hover {
+            background: #059669;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(16, 185, 129, 0.4);
+        }
+
+        .cta-secondary {
+            background: #357edd;
+            color: white;
+        }
+
+        .cta-secondary:hover {
+            background: #2868c7;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(53, 126, 221, 0.4);
+        }
+
+        /* Hero Right - Medical Circle */
+        .hero-right {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .medical-circle {
+            position: relative;
+            width: 500px;
+            height: 500px;
+            border: 3px solid rgba(38, 198, 218, 0.3);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .medical-cross {
+            width: 180px;
+            height: 180px;
+            background: linear-gradient(135deg, #26c6da 0%, #00acc1 100%);
+            border-radius: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 80px;
+            box-shadow: 0 10px 40px rgba(38, 198, 218, 0.4);
+            transform: rotate(45deg);
+            z-index: 10;
+        }
+
+        .medical-cross i {
+            transform: rotate(-45deg);
+        }
+
+        /* Floating Dots */
+        .floating-dot {
+            position: absolute;
+            width: 12px;
+            height: 12px;
+            background: #26c6da;
+            border-radius: 50%;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .dot-1 {
+            top: 15%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+
+        .dot-2 {
+            top: 18%;
+            right: 15%;
+            animation-delay: 0.5s;
+        }
+
+        .dot-3 {
+            bottom: 20%;
+            left: 8%;
+            animation-delay: 1s;
+        }
+
+        .dot-4 {
+            bottom: 15%;
+            right: 12%;
+            animation-delay: 1.5s;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-15px);
+            }
+        }
+
+        /* Medical Icons */
+        .medical-icons {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+        }
+
+        .icon-circle {
+            position: absolute;
+            width: 70px;
+            height: 70px;
+            background: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            animation: iconFloat 4s ease-in-out infinite;
+        }
+
+        .icon-circle i {
+            font-size: 28px;
+            color: #26c6da;
+        }
+
+        .icon-1 {
+            top: 10%;
+            left: 25%;
+            animation-delay: 0s;
+        }
+
+        .icon-2 {
+            bottom: 25%;
+            left: -5%;
+            animation-delay: 1.3s;
+        }
+
+        .icon-3 {
+            bottom: 8%;
+            right: 18%;
+            animation-delay: 2.6s;
+        }
+
+        @keyframes iconFloat {
+            0%, 100% {
+                transform: translateY(0px) scale(1);
+            }
+            50% {
+                transform: translateY(-20px) scale(1.05);
+            }
+        }
+
+        /* Chatbot Float Button */
+        .chatbot-float {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            background: #1e88e5;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 26px;
+            box-shadow: 0 4px 20px rgba(30, 136, 229, 0.4);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+
+        .chatbot-float:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 30px rgba(30, 136, 229, 0.6);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .hero-container {
+                grid-template-columns: 1fr;
+                gap: 60px;
+            }
+
+            .hero-title {
+                font-size: 48px;
+            }
+
+            .medical-circle {
+                width: 400px;
+                height: 400px;
+            }
+
+            .medical-cross {
+                width: 140px;
+                height: 140px;
+                font-size: 60px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header {
+                padding: 15px 20px;
+            }
+
+            .nav-container {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .main-content {
+                padding: 40px 20px;
+            }
+
+            .hero-title {
+                font-size: 36px;
+            }
+
+            .medical-circle {
+                width: 300px;
+                height: 300px;
+            }
+
+            .medical-cross {
+                width: 100px;
+                height: 100px;
+                font-size: 40px;
+            }
+
+            .icon-circle {
+                width: 50px;
+                height: 50px;
+            }
+
+            .icon-circle i {
+                font-size: 20px;
+            }
+
+            .chatbot-float {
+                width: 50px;
+                height: 50px;
+                font-size: 22px;
+                bottom: 20px;
+                right: 20px;
+            }
+        }
+    </style>
 </head>
 <body>
-  <div class="card">
-    <h1>NurseLink — For Nurses</h1>
-    <p>Join NurseLink to take verified home-care jobs, manage shifts and get paid. For demo: onboard & login work end-to-end.</p>
 
-    <p>
-      <a class="cta" href="{% url 'nurse_onboard' %}">Get Onboarded</a>
-      <a class="cta" style="background:#357edd" href="{% url 'nurse_login' %}">Login</a>
-    </p>
+    <!-- Header -->
+    <header class="header">
+        <nav class="nav-container">
+            <div class="logo">
+                <div class="logo-icon">
+                    <i class="fas fa-heartbeat"></i>
+                </div>
+                <span class="logo-text">NurseLink</span>
+            </div>
+        </nav>
+    </header>
 
-    <hr>
-    <h3>Demo Notes</h3>
-    <ul>
-      <li>Uploads are saved to <code>/media/nurse_certificates/</code>.</li>
-      <li>Profiles are marked <em>not approved</em> by default — admin approval is out of scope for demo.</li>
-    </ul>
-  </div>
+    <!-- Main Content -->
+    <main class="main-content">
+        <section class="hero">
+            <div class="hero-container">
+                <div class="hero-left">
+                    <h1 class="hero-title">
+                        <span class="hero-title-main">NurseLink — For Nurses</span>
+                    </h1>
+                    <p class="hero-description">
+                        Join NurseLink to take verified home-care jobs, manage shifts and get paid. For demo: onboard & login work end-to-end.
+                    </p>
+                    <div class="cta-buttons">
+                        <a href="{% url 'nurse_onboard' %}"><button class="cta-primary">Get Onboarded</button></a>
+                        <a href="{% url 'nurse_login' %}"><button class="cta-secondary">Login</button></a>
+                    </div>
+                </div>
+                <div class="hero-right">
+                    <div class="medical-circle">
+                        <div class="floating-dot dot-1"></div>
+                        <div class="floating-dot dot-2"></div>
+                        <div class="floating-dot dot-3"></div>
+                        <div class="floating-dot dot-4"></div>
+                        <div class="medical-cross">
+                            <i class="fas fa-plus"></i>
+                        </div>
+                        <div class="medical-icons">
+                            <div class="icon-circle icon-1">
+                                <i class="fas fa-stethoscope"></i>
+                            </div>
+                            <div class="icon-circle icon-2">
+                                <i class="fas fa-user-md"></i>
+                            </div>
+                            <div class="icon-circle icon-3">
+                                <i class="fas fa-heartbeat"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Chatbot Float Button -->
+    <a href="{% url 'chatbot_home' %}" target="_blank" class="chatbot-float">
+        <i class="fas fa-comment-dots"></i>
+    </a>
+
 </body>
 </html>
